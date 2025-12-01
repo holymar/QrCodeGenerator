@@ -1,14 +1,10 @@
-using Microsoft.OpenApi.Models;
 using QrCodeGenerator.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "QrCodeGenerator API", Version = "v1" });
-});
+builder.Services.AddSwaggerGen();
 
 CoreRegistrator.RegisterCoreServices(builder.Services);
 
@@ -30,9 +26,10 @@ app.UseAuthorization();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("swagger/v1/swagger.json", "QrCodeGenerator API v1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "QrCodeGenerator API");
     c.RoutePrefix = string.Empty;
 });
+app.MapSwagger();
 app.MapControllers();
 
 app.Run();

@@ -1,19 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-	<LangVersion>latest</LangVersion>
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>191e6dce-b4de-4858-a99e-6917a3c26b8a</UserSecretsId>
+    <ContainerRepository>qrcodegenerator-api</ContainerRepository>
+    <ContainerImageTag>latest</ContainerImageTag>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\QrCodeGenerator.Core\QrCodeGenerator.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ContainerPort Include="7226" Type="tcp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ContainerEnvironmentVariable Include="ASPNETCORE_HTTP_PORTS" Value="7226" />
   </ItemGroup>
 
 </Project>
