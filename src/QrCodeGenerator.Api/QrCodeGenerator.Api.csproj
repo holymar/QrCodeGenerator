@@ -23,7 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ContainerEnvironmentVariable Include="ASPNETCORE_HTTP_PORTS" Value="7226" />
+    <ContainerEnvironmentVariable Include="ASPNETCORE_URLS" Value="https://+:7226" />
+    <ContainerEnvironmentVariable Include="ASPNETCORE_Kestrel__Certificates__Default__Path" Value="/https/qrcodegenerator.pfx" />
+    <ContainerEnvironmentVariable Include="ASPNETCORE_Kestrel__Certificates__Default__Password" Value="CertPassword123!" />
   </ItemGroup>
 
 </Project>

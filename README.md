@@ -30,15 +30,19 @@ API will be available at `https://localhost:7226`
 ### Docker
 
 ```bash
+# Generate HTTPS certificate (one-time setup)
+dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\qrcodegenerator.pfx -p CertPassword123!
+dotnet dev-certs https --trust
+
 # Build container
 dotnet publish src/QrCodeGenerator.Api/QrCodeGenerator.Api.csproj \
     --os linux --arch x64 -c Release -p:PublishProfile=DefaultContainer
 
-# Run container
-docker run -p 7226:7226 qrcodegenerator-api:latest
+# Run container with HTTPS certificate
+docker run -d -p 7226:7226 -v ${env:USERPROFILE}/.aspnet/https:/https:ro qrcodegenerator-api:latest
 ```
 
-API will be available at `http://localhost:7226`
+API will be available at `https://localhost:7226`
 
 ## API Endpoints
 
@@ -97,7 +101,7 @@ curl "http://localhost:7226/CzechPayment?accountNumber=192000145399&bankCode=080
 Interactive API documentation is available at the root URL after starting the application:
 
 - **Local:** https://localhost:7226
-- **Docker:** http://localhost:7226
+- **Docker:** https://localhost:7226
 
 ## Project Structure
 
